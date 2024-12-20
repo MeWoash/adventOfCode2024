@@ -1,0 +1,3 @@
+/home/user/kody/adventOfCode2024/build/CMakeFiles/out.dir
+/home/user/kody/adventOfCode2024/build/CMakeFiles/edit_cache.dir
+/home/user/kody/adventOfCode2024/build/CMakeFiles/rebuild_cache.dir

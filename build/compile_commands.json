@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/home/user/kody/adventOfCode2024/build",
+  "command": "/usr/bin/g++  -I/home/user/kody/adventOfCode2024/day_1/include -I/home/user/kody/adventOfCode2024/day_1/../utils/include -g -std=gnu++23 -Werror -Wall -Wextra -Wpedantic -o CMakeFiles/out.dir/src/main.cpp.o -c /home/user/kody/adventOfCode2024/day_1/src/main.cpp",
+  "file": "/home/user/kody/adventOfCode2024/day_1/src/main.cpp",
+  "output": "CMakeFiles/out.dir/src/main.cpp.o"
+}
+]
