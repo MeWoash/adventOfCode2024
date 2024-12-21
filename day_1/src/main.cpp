@@ -6,6 +6,8 @@
 #include <string>
 #include <math.h>
 #include <map>
+#include <string_view>
+#include "utils.h"
 
 void part1(std::vector<int> list1, std::vector<int> list2)
 {
@@ -22,7 +24,7 @@ void part1(std::vector<int> list1, std::vector<int> list2)
     std::cout<<"distance: "<<dist<<"\n";
 }
 
-void part2([[maybe_unused]]std::vector<int> list1, std::vector<int> list2)
+void part2(std::vector<int> list1, std::vector<int> list2)
 {
     std::map<int, int> freq{};
     
@@ -44,16 +46,7 @@ void part2([[maybe_unused]]std::vector<int> list1, std::vector<int> list2)
 
 int main()
 {
-        std::string sourceFilePath{__FILE__};
-
-    sourceFilePath = sourceFilePath.substr(0, sourceFilePath.find_last_of("/\\"));
-    sourceFilePath += "/input.txt";
-
-    std::ifstream inputFile{sourceFilePath};
-    if (!inputFile) {
-        std::cerr << "Cannot open file" << std::endl;
-        return 0;
-    }
+    std::ifstream inputFile{Utils::loadFile(__FILE__, "/input.txt")};
 
     std::vector<int> list1{}, list2{};
     std::string val1{}, val2{};
