@@ -49,11 +49,12 @@ int main()
     std::ifstream inputFile{Utils::loadFile(__FILE__, "/input.txt")};
 
     std::vector<int> list1{}, list2{};
-    std::string val1{}, val2{};
+    
+    int val1{}, val2{};
 
     while (inputFile >> val1 >> val2) {
-        list1.push_back(std::stoi(val1));
-        list2.push_back(std::stoi(val2));
+        list1.push_back(val1);
+        list2.push_back(val2);
     }
 
     inputFile.close();

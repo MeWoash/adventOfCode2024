@@ -16,7 +16,7 @@ std::ifstream loadFile(std::string_view src_path, std::string_view filename)
         throw std::runtime_error("Cannot open file: " + sourceFilePath);
     }
 
-    return inputFile;
+    return inputFile; // move semantics
 }
 
 
