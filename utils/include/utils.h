@@ -5,6 +5,8 @@
 #include <iostream>
 #include <vector>
 #include <sstream>
+#include <chrono>
+#include <utility>
 
 namespace Utils
 {
@@ -32,6 +34,26 @@ std::vector<std::vector<T>> loadValues(std::ifstream& ifstream)
 
     return vector;
     
+}
+
+template <typename Func, typename Unit = std::chrono::nanoseconds>
+typename Unit::rep timeIt(Func&& func, int n_runs = 1) {
+    
+    typename Unit::rep total_duration{0};
+    
+    for (int run = 0; run < n_runs; ++run) {
+        auto start = std::chrono::high_resolution_clock::now();
+        std::forward<Func>(func)();
+        auto end = std::chrono::high_resolution_clock::now();
+
+        auto duration = std::chrono::duration_cast<Unit>(end - start).count();
+        total_duration += duration;
+    }
+
+    auto avg_duration{total_duration / n_runs};
+    std::cout << std::setprecision(10) << "AVG Time of function: " << avg_duration << " units\n";
+
+    return avg_duration;
 }
 
 }
