@@ -14,26 +14,35 @@ namespace Utils
 std::ifstream loadFile(std::string_view src_path, std::string_view filename);
 
 template <typename T>
-std::vector<std::vector<T>> loadValues(std::ifstream& ifstream)
+std::vector<std::vector<T>> loadValues(std::ifstream& fin, char delimiter = ',')
 {  
-    std::vector<std::vector<T>> vector{};
-    std::string line{};
+    std::vector<std::vector<T>> result;
+    std::string line;
 
-    while (std::getline(ifstream, line))
+    while (std::getline(fin, line))
     {
-        std::istringstream stream{line};
-        std::vector<T> row{};
-        
-        T value{};
-        while (stream >> value)
-        {
-            row.push_back(value);
+        if (line.empty()) {
+            break;
         }
-        vector.push_back(std::move(row));
+        
+        std::vector<T> row{};
+        std::istringstream stream(line);
+        std::string token{};
+        
+        while (std::getline(stream, token, delimiter))
+        {
+            if (!token.empty())
+            {
+                std::istringstream tokenStream(token);
+                T value{};
+                tokenStream >> value;
+                row.push_back(value);
+            }
+        }
+        result.push_back(std::move(row));
     }
 
-    return vector;
-    
+    return result;
 }
 
 template <typename Func, typename Unit = std::chrono::nanoseconds>
