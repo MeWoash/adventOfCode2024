@@ -80,7 +80,7 @@ void part2(const std::string& input)
 int main()
 {
     
-    auto file{Utils::loadFile(__FILE__, "/input_test.txt")};
+    auto file{Utils::loadFile(__FILE__, "/input.txt")};
     std::ostringstream buffer;
     buffer << file.rdbuf();
     auto input{buffer.str()};
