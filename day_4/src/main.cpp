@@ -110,6 +110,39 @@ void part1(const std::vector<std::string>& input, std::string_view word)
     std::cout<<"Words found: "<<count<<"\n";
 }
 
+void part2(const std::vector<std::string>& input)
+{
+    uint64_t count{};
+    int max_rows{static_cast<int>(input.size())};
+    int max_cols{static_cast<int>(input[0].size())};
+
+    const std::vector<std::string>& words{"MSAMS", "MMASS", "SMASM", "SSAMM"};
+
+    constexpr size_t pattern_rows{3};
+    constexpr size_t pattern_cols{3};
+
+    for (size_t row{0}; row < max_rows - pattern_rows + 1; row++)
+    {
+        for (size_t col{0}; col < max_cols - pattern_cols + 1; col++)
+        {
+            std::string in_str{
+                input[row][col],
+                input[row][col+2],
+                input[row+1][col+1],
+                input[row+2][col],
+                input[row+2][col+2],
+            };
+            // std::cout<<row<<" "<<col<<" "<<in_str<<"\n";
+
+            for ( const auto& word : words)
+            {
+                word==in_str ? count++: count;
+            }
+        }
+    }
+    std::cout<<"count: "<<count<<"\n";
+}
+
 
 int main()
 {
@@ -125,6 +158,7 @@ int main()
     }
 
     part1(vector, "XMAS");
+    part2(vector); // hardcoded
     // Utils::timeIt([&input](){part1(input);}, 1);
 
     
