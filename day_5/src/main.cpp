@@ -21,6 +21,12 @@ std::ostream& operator<<(std::ostream& os, std::map<T, N> map)
     return os;
 }
 
+template <typename T>
+T getMiddleElement(const std::vector<T>& vec)
+{
+    return vec[(vec.size() / 2)];
+}
+
 bool isUpdateValid(const std::map<int, std::vector<int>>& ruleset, const std::vector<int>& update)
 {
     auto it{update.rbegin()};
@@ -34,13 +40,13 @@ bool isUpdateValid(const std::map<int, std::vector<int>>& ruleset, const std::ve
         {
             auto val_cmp{*it_cmp};
             // std::cout<<val<<" & "<<val_cmp<<"\n";
-            std::cout<<"comparing: "<<val<<" "<<val_cmp<<"\n";
+            // std::cout<<"comparing: "<<val<<" "<<val_cmp<<"\n";
             if (ruleset.contains(val_cmp))
             {
                 const auto& values{ruleset.at(val_cmp)};
                 if (std::find(values.begin(), values.end(), val) == values.end())
                 {
-                    std::cout<<"Update: "<<update<<" value: "<<val<<" val_cmp: "<<val_cmp<<"\n";
+                    // std::cout<<"Update: "<<update<<" value: "<<val<<" val_cmp: "<<val_cmp<<"\n";
                     return false;
                 }
             }
@@ -56,17 +62,21 @@ bool isUpdateValid(const std::map<int, std::vector<int>>& ruleset, const std::ve
 
 void part1([[maybe_unused]]const std::map<int, std::vector<int>>& ruleset, const std::vector<std::vector<int>>& updates)
 {
-
+    int sum{};
     for (const auto& update : updates)
     {
-        isUpdateValid(ruleset, update);
+        if (isUpdateValid(ruleset, update))
+        {
+            sum+=getMiddleElement(update);
+        }
     }
+    std::cout<<"sum: "<<sum<<"\n";
 }
 
 int main()
 {
     
-    auto file{Utils::loadFile(__FILE__, "/input_test.txt")};
+    auto file{Utils::loadFile(__FILE__, "/input.txt")};
     
     std::map<int, std::vector<int>> ruleset{};
     std::string line{};
@@ -89,8 +99,8 @@ int main()
 
     auto updates{Utils::loadValues<int>(file, ',')};
 
-    std::cout<<ruleset;
-    std::cout<<updates;
+    // std::cout<<ruleset;
+    // std::cout<<updates;
 
     part1(ruleset, updates);
     
